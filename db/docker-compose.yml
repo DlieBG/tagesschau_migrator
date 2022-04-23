@@ -1,0 +1,30 @@
+version: '3.5'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: tagesschau
+      POSTGRES_PASSWORD: geheim
+      PGPORT: 5434
+      PGDATA: /data/postgres
+    volumes:
+       - ./db_data:/data/postgres
+    ports:
+      - 5434:5434
+    restart: unless-stopped
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+       - pgadmin:/var/lib/pgadmin
+    ports:
+      - 6069:80
+    restart: unless-stopped
+
+volumes:
+    pgadmin:
