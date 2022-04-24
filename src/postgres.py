@@ -74,6 +74,9 @@ class Postgres:
         if(article.get('tags')):
             self.__insert_tags(newsId, article['tags'])
         
+        # self.conn.commit()
+
+    def commit(self):
         self.conn.commit()
 
     def delete_articles(self):
